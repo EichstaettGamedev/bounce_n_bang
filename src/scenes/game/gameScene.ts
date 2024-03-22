@@ -2,6 +2,7 @@ import { GameObjects, Scene } from 'phaser';
 
 import '../../types';
 import { UIScene } from '../ui/uiScene';
+import { Entity } from './Entity';
 
 export type KeyMap = {
     Up: Phaser.Input.Keyboard.Key;
@@ -22,6 +23,8 @@ export class GameScene extends Scene {
     score = 0;
 
     playerVelocity = 2;
+    player?: Entity;
+    background?: Phaser.GameObjects.Image;
 
     playerX = 0;
     playerY = 0;
@@ -38,10 +41,14 @@ export class GameScene extends Scene {
     }
 
     create() {
-        const that = this;
-
         this.score = 0;
         this.sound.pauseOnBlur = false;
+
+        this.player = new Entity(this, 1280/2, 720 - 720/5);
+
+        this.background = this.add.image(0,0,'background');
+        this.background.setOrigin(0,0);
+        this.background.setDepth(-1);
 
         const ui = this.scene.get('UIScene') as UIScene;
         ui.events.emit('reset');
@@ -62,27 +69,28 @@ export class GameScene extends Scene {
             }
         }, this);
 
-        this.scoreText = this.add.text(16, 16, "Score: ", { fontSize: 64, color: '#000000' });
-        this.scoreText.setDepth(1000);
-
         //this.cameras.main.setBounds(0, 0, 1280, 720);
         //this.cameras.main.startFollow(this.player, false, 0.1, 0.1, 0, 0);
     }
 
     update(time: number, delta: number) {
         this.gameTicks += delta;
+        let dx = 0;
+        let dy = 0;
         if(this.keymap?.A.isDown || this.keymap?.Left.isDown){
-            this.playerX -= 8;
+            dx += -1;
         }
         if(this.keymap?.D.isDown || this.keymap?.Right.isDown){
-            this.playerX += 8;
+            dx += 1;
         }
         if(this.keymap?.W.isDown || this.keymap?.Up.isDown){
-            this.playerY -= 8;
+            dy += -1;
         }
         if(this.keymap?.S.isDown || this.keymap?.Down.isDown){
-            this.playerY += 8;
+            dy += 1;
         }
-        this.cameras.main.setScroll(this.playerX, this.playerY);
+        this.player?.move(dx,dy);
+        this.player?.lookAt(this.game.input.mousePointer?.x || 0, this.game.input.mousePointer?.y || 0);
+        //this.cameras.main.setScroll(this.playerX, this.playerY);
     }
 }
