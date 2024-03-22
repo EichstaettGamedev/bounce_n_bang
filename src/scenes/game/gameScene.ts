@@ -62,6 +62,7 @@ export class GameScene extends Scene {
     }
 
     create() {
+        this.sound.play('music');
         this.score = 0;
         this.sound.pauseOnBlur = false;
 
