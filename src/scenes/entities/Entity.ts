@@ -5,15 +5,27 @@ export class Entity extends Physics.Arcade.Sprite {
     speed = 4;
     lastShot = -1000;
     shootCooldown = 200;
+    moveSound: Phaser.Sound.BaseSound;
 
     constructor(scene: Scene, x: number, y: number) {
         super(scene, x, y, "player");
         scene.add.existing(this);
+        this.moveSound = this.scene.sound.add('move', { loop: true, volume: 0.5 });
     }
 
-    move(dx: number, dy: number) {
+       move(dx: number, dy: number) {
         this.x += dx * this.speed;
         this.y += dy * this.speed;
+
+        if (!this.moveSound.isPlaying) {
+            this.moveSound.play();
+        }
+
+    
+    }
+    stopMoving() {
+        this.moveSound.stop();
+        this.moveSound.play();
     }
 
     shootAt(x: number, y: number) {

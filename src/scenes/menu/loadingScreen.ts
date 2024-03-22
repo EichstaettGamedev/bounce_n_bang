@@ -110,6 +110,7 @@ export class LoadingScreenScene extends Scene {
         this.load.audio('bounce', 'sfx/enemydown.mp3');
         this.load.audio('bounce', 'sfx/gunshot.mp3');
         this.load.audio('bounce', 'sfx/winlvl.mp3');
+        this.load.audio('bounce', 'sfx/move.mp3');
         
     }
 
