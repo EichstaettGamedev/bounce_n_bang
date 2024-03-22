@@ -59,12 +59,17 @@ export class GameScene extends Scene {
 
     spawnEnemy(){
         new Enemy(this, 1280/2, 720/4 - 720/16);
-        new Enemy(this, 1280/2 + 1280/4, 720/4);
-        new Enemy(this, 1280/2 - 1280/4, 720/4);
+        if(this.level > 1){
+            new Enemy(this, 1280/2 + 1280/4, 720/4);
+        }
+        if(this.level > 2){
+            new Enemy(this, 1280/2 - 1280/4, 720/4);
+        }
     }
 
     create() {
         this.score = 0;
+        this.level = 1;
         this.sound.pauseOnBlur = false;
 
 
