@@ -1,14 +1,21 @@
-import { Physics, Scene } from "phaser";
+import { Physics } from "phaser";
 import { Bullet } from "./Bullet";
+import { GameScene } from "../game/gameScene";
 
 export class Entity extends Physics.Arcade.Sprite {
     speed = 4;
     lastShot = -1000;
     shootCooldown = 200;
 
-    constructor(scene: Scene, x: number, y: number, tex: string) {
+    constructor(scene: GameScene, x: number, y: number, tex: string) {
         super(scene, x, y, tex);
         scene.add.existing(this);
+        scene.entities.add(this);
+    }
+
+    die(){
+        this.destroy(true);
+
     }
 
     move(dx: number, dy: number) {
@@ -27,7 +34,7 @@ export class Entity extends Physics.Arcade.Sprite {
         const max = Math.max(Math.abs(dx), Math.abs(dy));
         const vx = dx/max;
         const vy = dy/max;
-        new Bullet(this.scene, this.x + vx * 40, this.y + vy * 40, vx, vy);
+        new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy);
     }
 
     lookAt(x: number, y: number){
