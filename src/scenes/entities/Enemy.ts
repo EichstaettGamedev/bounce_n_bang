@@ -7,4 +7,8 @@ export class Enemy extends Entity {
         scene.add.existing(this);
         scene.enemies.add(this);
     }
+
+    preUpdate(time: number, delta: number): void {
+        this.setRotation(this.rotation + delta * 0.001);
+    }
 }
