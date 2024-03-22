@@ -108,10 +108,10 @@ export class LoadingScreenScene extends Scene {
         this.load.image('bullet', 'unpacked_gfx/bullet.png');
 
         this.load.audio('bounce', 'sfx/bounce.mp3');
-        this.load.audio('bounce', 'sfx/death.mp3');
-        this.load.audio('bounce', 'sfx/enemydown.mp3');
-        this.load.audio('bounce', 'sfx/gunshot.mp3');
-        this.load.audio('bounce', 'sfx/winlvl.mp3');
+        this.load.audio('death', 'sfx/death.mp3');
+        this.load.audio('enemydown', 'sfx/enemydown.mp3');
+        this.load.audio('gunshot', 'sfx/gunshot.mp3');
+        this.load.audio('winlvl', 'sfx/winlvl.mp3');
         this.load.audio('move', 'sfx/move.mp3');
 
     }
