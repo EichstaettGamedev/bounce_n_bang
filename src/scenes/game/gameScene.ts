@@ -27,6 +27,7 @@ export class GameScene extends Scene {
     playerVelocity = 2;
     player?: Entity;
     enemies = new Set<Enemy>();
+    entities = new Set<Entity>();
     background?: Phaser.GameObjects.Image;
 
     playerX = 0;
