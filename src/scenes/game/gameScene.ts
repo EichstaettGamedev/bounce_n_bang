@@ -1,8 +1,10 @@
-import { GameObjects, Scene } from 'phaser';
+import { Scene } from 'phaser';
 
 import '../../types';
 import { UIScene } from '../ui/uiScene';
 import { Entity } from '../entities/Entity';
+import { Player } from '../entities/Player';
+import { Enemy } from '../entities/Enemy';
 
 export type KeyMap = {
     Up: Phaser.Input.Keyboard.Key;
@@ -24,6 +26,8 @@ export class GameScene extends Scene {
 
     playerVelocity = 2;
     player?: Entity;
+    enemies = new Set<Enemy>();
+    entities = new Set<Entity>();
     background?: Phaser.GameObjects.Image;
 
     playerX = 0;
@@ -40,11 +44,18 @@ export class GameScene extends Scene {
         this.gameOverActive = false;
     }
 
+    spawnEnemy(){
+        new Enemy(this, 1280/2, 720/4 - 720/16);
+        new Enemy(this, 1280/2 + 1280/4, 720/4);
+        new Enemy(this, 1280/2 - 1280/4, 720/4);
+    }
+
     create() {
         this.score = 0;
         this.sound.pauseOnBlur = false;
 
-        this.player = new Entity(this, 1280/2, 720 - 720/5);
+        this.player = new Player(this, 1280/2, 720 - 720/5);
+        this.spawnEnemy();
 
         this.background = this.add.image(0,0,'background');
         this.background.setOrigin(0,0);
@@ -73,6 +84,10 @@ export class GameScene extends Scene {
         //this.cameras.main.startFollow(this.player, false, 0.1, 0.1, 0, 0);
     }
 
+    addScore(points = 1){
+        this.score += points;
+    }
+
     update(time: number, delta: number) {
         this.gameTicks += delta;
         let dx = 0;
@@ -96,6 +111,10 @@ export class GameScene extends Scene {
 
         if(this.game.input.mousePointer?.leftButtonDown()){
             this.player?.shootAt(mx,my)
+        }
+
+        if(this.player?.died){
+            this.scene.switch("GameOverScene");
         }
         //this.cameras.main.setScroll(this.playerX, this.playerY);
     }

@@ -102,9 +102,11 @@ export class LoadingScreenScene extends Scene {
     preload() {
         this.initLoadScreen();
         //this.load.multiatlas('packed', 'gfx/packed.json', 'gfx');
-        this.load.image('player', 'unpacked_gfx/player.png');
+        this.load.image('player1', 'unpacked_gfx/player1.png');
+        this.load.image('player2', 'unpacked_gfx/player2.png');
         this.load.image('background', 'unpacked_gfx/background.png');
         this.load.image('bullet', 'unpacked_gfx/bullet.png');
+
         this.load.audio('bounce', 'sfx/bounce.mp3');
         this.load.audio('bounce', 'sfx/death.mp3');
         this.load.audio('bounce', 'sfx/enemydown.mp3');

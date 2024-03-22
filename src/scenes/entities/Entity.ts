@@ -1,16 +1,27 @@
-import { Physics, Scene } from "phaser";
+import { Physics } from "phaser";
 import { Bullet } from "./Bullet";
+import { GameScene } from "../game/gameScene";
 
 export class Entity extends Physics.Arcade.Sprite {
     speed = 4;
     lastShot = -1000;
     shootCooldown = 200;
     moveSound: Phaser.Sound.BaseSound;
+    died = false;
 
-    constructor(scene: Scene, x: number, y: number) {
-        super(scene, x, y, "player");
+    constructor(scene: GameScene, x: number, y: number, tex: string) {
+        super(scene, x, y, tex);
         scene.add.existing(this);
         this.moveSound = this.scene.sound.add('move', { loop: true, volume: 0.5 });
+        scene.entities.add(this);
+    }
+
+    die(){
+        if(this.died){
+            return;
+        }
+        this.died = true;
+        this.destroy(true);
     }
 
        move(dx: number, dy: number) {
@@ -39,7 +50,7 @@ export class Entity extends Physics.Arcade.Sprite {
         const max = Math.max(Math.abs(dx), Math.abs(dy));
         const vx = dx/max;
         const vy = dy/max;
-        new Bullet(this.scene, this.x, this.y, vx, vy);
+        new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy);
     }
 
     lookAt(x: number, y: number){
