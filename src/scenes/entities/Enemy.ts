@@ -9,6 +9,9 @@ export class Enemy extends Entity {
     }
 
     die(){
+        if(this.scene){
+            (this.scene as GameScene).addScore(1);
+        }
         super.die();
     }
 
