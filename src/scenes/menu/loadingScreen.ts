@@ -113,6 +113,7 @@ export class LoadingScreenScene extends Scene {
         this.load.audio('gunshot', 'sfx/gunshot.mp3');
         this.load.audio('winlvl', 'sfx/winlvl.mp3');
         this.load.audio('move', 'sfx/move.mp3');
+        this.load.audio('music', 'sfx/music.mp3')
 
     }
 
