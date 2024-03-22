@@ -105,6 +105,7 @@ export class GameScene extends Scene {
     }
 
     nextLevel() {
+        this.sound.play('winlvl');
         this.level++;
         for(const e of this.entities){
             e.die();
