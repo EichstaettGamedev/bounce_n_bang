@@ -103,6 +103,7 @@ export class LoadingScreenScene extends Scene {
         this.initLoadScreen();
         //this.load.multiatlas('packed', 'gfx/packed.json', 'gfx');
         this.load.image('player', 'unpacked_gfx/player.png');
+        this.load.image('background', 'unpacked_gfx/background.png');
     }
 
     create() {

@@ -24,6 +24,7 @@ export class GameScene extends Scene {
 
     playerVelocity = 2;
     player?: Entity;
+    background?: Phaser.GameObjects.Image;
 
     playerX = 0;
     playerY = 0;
@@ -43,7 +44,11 @@ export class GameScene extends Scene {
         this.score = 0;
         this.sound.pauseOnBlur = false;
 
-        this.player = new Entity(this, 1280/2, 720/2);
+        this.player = new Entity(this, 1280/2, 720 - 720/5);
+
+        this.background = this.add.image(0,0,'background');
+        this.background.setOrigin(0,0);
+        this.background.setDepth(-1);
 
         const ui = this.scene.get('UIScene') as UIScene;
         ui.events.emit('reset');
@@ -63,9 +68,6 @@ export class GameScene extends Scene {
                 console.log(pointer);
             }
         }, this);
-
-        this.scoreText = this.add.text(16, 16, "Score: ", { fontSize: 64, color: '#000000' });
-        this.scoreText.setDepth(1000);
 
         //this.cameras.main.setBounds(0, 0, 1280, 720);
         //this.cameras.main.startFollow(this.player, false, 0.1, 0.1, 0, 0);
