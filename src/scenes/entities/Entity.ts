@@ -51,6 +51,8 @@ export class Entity extends Physics.Arcade.Sprite {
         const vx = dx/max;
         const vy = dy/max;
         new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy);
+        this.scene.sound.play('gunshot');
+        
     }
 
     lookAt(x: number, y: number){
