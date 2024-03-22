@@ -2,7 +2,7 @@ import { GameObjects, Scene } from 'phaser';
 
 import '../../types';
 import { UIScene } from '../ui/uiScene';
-import { Entity } from './Entity';
+import { Entity } from '../entities/Entity';
 
 export type KeyMap = {
     Up: Phaser.Input.Keyboard.Key;
