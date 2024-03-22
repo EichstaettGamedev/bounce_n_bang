@@ -22,6 +22,7 @@ export class Entity extends Physics.Arcade.Sprite {
         }
         this.died = true;
         this.destroy(true);
+        this.scene.sound.play('enemydown');
     }
 
        move(dx: number, dy: number) {
