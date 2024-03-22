@@ -31,15 +31,17 @@ export class Entity extends Physics.Arcade.Sprite {
         if (!this.moveSound.isPlaying) {
             this.moveSound.play();
         }
-
-
     }
+
     stopMoving() {
         this.moveSound.stop();
         this.moveSound.play();
     }
 
     shootAt(x: number, y: number) {
+        if(!this.scene){
+            return;
+        }
         if(this.scene.time.now < (this.lastShot + this.shootCooldown)){
             return;
         }
