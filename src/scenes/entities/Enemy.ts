@@ -8,6 +8,7 @@ export class Enemy extends Entity {
         super(scene, x, y, "player2");
         scene.add.existing(this);
         scene.enemies.add(this);
+        this.rotation = Math.random() * Math.PI;
     }
 
     die(){
