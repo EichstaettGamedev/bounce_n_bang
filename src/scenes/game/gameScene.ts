@@ -5,6 +5,7 @@ import { UIScene } from '../ui/uiScene';
 import { Entity } from '../entities/Entity';
 import { Player } from '../entities/Player';
 import { Enemy } from '../entities/Enemy';
+import { Bullet } from '../entities/Bullet';
 
 export type KeyMap = {
     Up: Phaser.Input.Keyboard.Key;
@@ -28,6 +29,7 @@ export class GameScene extends Scene {
     player?: Entity;
     enemies = new Set<Enemy>();
     entities = new Set<Entity>();
+    bullets = new Set<Bullet>();
     background?: Phaser.GameObjects.Image;
 
     playerX = 0;
@@ -101,8 +103,12 @@ export class GameScene extends Scene {
         for(const e of this.entities){
             e.die();
         }
+        for(const e of this.bullets){
+            e.destroy(true);
+        }
         this.enemies.clear();
         this.entities.clear();
+        this.bullets.clear();
         this.resetPlayer();
         this.spawnEnemy();
     }

@@ -25,7 +25,7 @@ export class Entity extends Physics.Arcade.Sprite {
         this.scene.sound.play('enemydown');
     }
 
-       move(dx: number, dy: number) {
+    move(dx: number, dy: number) {
         this.x += dx * this.speed;
         this.y += dy * this.speed;
 
@@ -33,7 +33,7 @@ export class Entity extends Physics.Arcade.Sprite {
             this.moveSound.play();
         }
 
-    
+
     }
     stopMoving() {
         this.moveSound.stop();
