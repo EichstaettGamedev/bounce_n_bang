@@ -65,7 +65,7 @@ export class GameScene extends Scene {
             const x = (pointer.worldX/32)|0;
             const y = (pointer.worldY/32)|0;
             if(pointer.buttons & 1){
-                console.log(pointer);
+                //console.log(pointer);
             }
         }, this);
 
@@ -90,7 +90,13 @@ export class GameScene extends Scene {
             dy += 1;
         }
         this.player?.move(dx,dy);
-        this.player?.lookAt(this.game.input.mousePointer?.x || 0, this.game.input.mousePointer?.y || 0);
+        const mx = this.game.input.mousePointer?.x || 0;
+        const my = this.game.input.mousePointer?.y || 0
+        this.player?.lookAt(mx,my);
+
+        if(this.game.input.mousePointer?.leftButtonDown()){
+            this.player?.shootAt(mx,my)
+        }
         //this.cameras.main.setScroll(this.playerX, this.playerY);
     }
 }
