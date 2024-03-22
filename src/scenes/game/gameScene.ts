@@ -123,9 +123,13 @@ export class GameScene extends Scene {
     countLiveEnemies() {
         let c = 0;
         for(const e of this.enemies){
-            if(!e.died){
-                c++;
+            if(e.died){
+                continue;
             }
+            if(!e.scene){
+                continue;
+            }
+            c++;
         }
         return c;
     }
