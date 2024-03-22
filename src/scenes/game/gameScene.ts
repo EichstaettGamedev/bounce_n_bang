@@ -32,6 +32,7 @@ export class GameScene extends Scene {
 
     playerX = 0;
     playerY = 0;
+    level = 0;
 
     scoreText?: Phaser.GameObjects.Text;
 
@@ -44,6 +45,16 @@ export class GameScene extends Scene {
         this.gameOverActive = false;
     }
 
+    addScore(points = 1){
+        this.score += points;
+    }
+
+    resetPlayer() {
+        const px = 1280/2;
+        const py = 720 - 720/5;
+        this.player = new Player(this, px, py);
+    }
+
     spawnEnemy(){
         new Enemy(this, 1280/2, 720/4 - 720/16);
         new Enemy(this, 1280/2 + 1280/4, 720/4);
@@ -54,7 +65,8 @@ export class GameScene extends Scene {
         this.score = 0;
         this.sound.pauseOnBlur = false;
 
-        this.player = new Player(this, 1280/2, 720 - 720/5);
+
+        this.resetPlayer();
         this.spawnEnemy();
 
         this.background = this.add.image(0,0,'background');
@@ -84,8 +96,25 @@ export class GameScene extends Scene {
         //this.cameras.main.startFollow(this.player, false, 0.1, 0.1, 0, 0);
     }
 
-    addScore(points = 1){
-        this.score += points;
+    nextLevel() {
+        this.level++;
+        for(const e of this.entities){
+            e.die();
+        }
+        this.enemies.clear();
+        this.entities.clear();
+        this.resetPlayer();
+        this.spawnEnemy();
+    }
+
+    countLiveEnemies() {
+        let c = 0;
+        for(const e of this.enemies){
+            if(!e.died){
+                c++;
+            }
+        }
+        return c;
     }
 
     update(time: number, delta: number) {
@@ -115,6 +144,9 @@ export class GameScene extends Scene {
 
         if(this.player?.died){
             this.scene.switch("GameOverScene");
+        }
+        if(this.countLiveEnemies() <= 0){
+            this.nextLevel();
         }
         //this.cameras.main.setScroll(this.playerX, this.playerY);
     }

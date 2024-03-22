@@ -28,7 +28,7 @@ export class UIScene extends Scene {
     update(time: number, delta: number) {
         const game = this.scene.get('GameScene') as GameScene;
         if(this.node){
-            this.node.innerHTML = `Score: ${game.score}`;
+            this.node.innerHTML = `Score: ${game.score}<br/>Level: ${game.level + 1}`;
         }
     }
 }
