@@ -9,6 +9,7 @@ export class Bullet extends Physics.Arcade.Image {
     constructor(scene: GameScene, x: number, y: number, vx: number, vy: number) {
         super(scene, x, y, "bullet");
         scene.add.existing(this);
+        (scene as GameScene).bullets.add(this);
         this.vx = this.speed * vx;
         this.vy = this.speed * vy;
         this.scene = scene;

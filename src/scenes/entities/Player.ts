@@ -13,5 +13,10 @@ export class Player extends Entity {
         }
         super.die();
     }
-};
 
+    move(dx: number, dy: number) {
+        super.move(dx,dy);
+        this.y = Math.min(720-32, Math.max(this.y, 500));
+        this.x = Math.min(1280-32, Math.max(this.x, 32));
+    }
+};

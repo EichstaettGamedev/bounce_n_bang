@@ -5,7 +5,7 @@ import { GameScene } from "../game/gameScene";
 export class Entity extends Physics.Arcade.Sprite {
     speed = 4;
     lastShot = -1000;
-    shootCooldown = 200;
+    shootCooldown = 500;
     moveSound: Phaser.Sound.BaseSound;
     died = false;
 
@@ -22,25 +22,32 @@ export class Entity extends Physics.Arcade.Sprite {
         }
         this.died = true;
         this.destroy(true);
-        this.scene.sound.play('enemydown');
     }
 
-       move(dx: number, dy: number) {
+    move(dx: number, dy: number) {
         this.x += dx * this.speed;
         this.y += dy * this.speed;
 
         if (!this.moveSound.isPlaying) {
             this.moveSound.play();
         }
-
-    
     }
+
     stopMoving() {
         this.moveSound.stop();
         this.moveSound.play();
     }
 
+    shootStraight() {
+        const vx = Math.cos(this.rotation) * 100;
+        const vy = Math.sin(this.rotation) * 100;
+        this.shootAt(this.x + vx, this.y + vy);
+    }
+
     shootAt(x: number, y: number) {
+        if(!this.scene){
+            return;
+        }
         if(this.scene.time.now < (this.lastShot + this.shootCooldown)){
             return;
         }
@@ -53,7 +60,7 @@ export class Entity extends Physics.Arcade.Sprite {
         const vy = dy/max;
         new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy);
         this.scene.sound.play('gunshot');
-        
+
     }
 
     lookAt(x: number, y: number){
