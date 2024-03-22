@@ -11,6 +11,7 @@ export class Enemy extends Entity {
     die(){
         if(this.scene){
             (this.scene as GameScene).addScore(1);
+            this.scene.sound.play('enemydown');
         }
         super.die();
     }

@@ -22,7 +22,6 @@ export class Entity extends Physics.Arcade.Sprite {
         }
         this.died = true;
         this.destroy(true);
-        this.scene.sound.play('enemydown');
     }
 
     move(dx: number, dy: number) {
@@ -53,7 +52,7 @@ export class Entity extends Physics.Arcade.Sprite {
         const vy = dy/max;
         new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy);
         this.scene.sound.play('gunshot');
-        
+
     }
 
     lookAt(x: number, y: number){
