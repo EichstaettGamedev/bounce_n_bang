@@ -8,6 +8,13 @@ export class Enemy extends Entity {
         scene.enemies.add(this);
     }
 
+    die(){
+        if(this.scene){
+            (this.scene as GameScene).addScore(1);
+        }
+        super.die();
+    }
+
     preUpdate(time: number, delta: number): void {
         this.setRotation(this.rotation + delta * 0.001);
     }

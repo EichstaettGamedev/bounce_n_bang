@@ -29,10 +29,11 @@ export class Bullet extends Physics.Arcade.Image {
 
         const scene = this.scene as GameScene;
         for(const e of scene.entities){
+            if(e.died){continue;}
             const dx = this.x - e.x;
             const dy = this.y - e.y;
             const dd = dx*dx + dy*dy;
-            if(dd < 16*16){
+            if(dd < 24*24){
                 e.die();
             }
         }

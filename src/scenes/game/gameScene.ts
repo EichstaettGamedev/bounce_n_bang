@@ -84,6 +84,10 @@ export class GameScene extends Scene {
         //this.cameras.main.startFollow(this.player, false, 0.1, 0.1, 0, 0);
     }
 
+    addScore(points = 1){
+        this.score += points;
+    }
+
     update(time: number, delta: number) {
         this.gameTicks += delta;
         let dx = 0;
@@ -107,6 +111,10 @@ export class GameScene extends Scene {
 
         if(this.game.input.mousePointer?.leftButtonDown()){
             this.player?.shootAt(mx,my)
+        }
+
+        if(this.player?.died){
+            this.scene.switch("GameOverScene");
         }
         //this.cameras.main.setScroll(this.playerX, this.playerY);
     }
