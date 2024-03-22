@@ -6,4 +6,12 @@ export class Player extends Entity {
         super(scene, x, y, "player1");
         scene.add.existing(this);
     }
-}
+
+    die(){
+        if(this.scene){
+            (this.scene as GameScene).sound.play('death');
+        }
+        super.die();
+    }
+};
+
