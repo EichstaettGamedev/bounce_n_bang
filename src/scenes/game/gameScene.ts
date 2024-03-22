@@ -108,6 +108,10 @@ export class GameScene extends Scene {
         if(this.game.input.mousePointer?.leftButtonDown()){
             this.player?.shootAt(mx,my)
         }
+
+        if(this.player?.died){
+            this.scene.switch("GameOverScene");
+        }
         //this.cameras.main.setScroll(this.playerX, this.playerY);
     }
 }

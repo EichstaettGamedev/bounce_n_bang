@@ -6,6 +6,7 @@ export class Entity extends Physics.Arcade.Sprite {
     speed = 4;
     lastShot = -1000;
     shootCooldown = 200;
+    died = false;
 
     constructor(scene: GameScene, x: number, y: number, tex: string) {
         super(scene, x, y, tex);
@@ -14,8 +15,11 @@ export class Entity extends Physics.Arcade.Sprite {
     }
 
     die(){
+        if(this.died){
+            return;
+        }
+        this.died = true;
         this.destroy(true);
-
     }
 
     move(dx: number, dy: number) {
