@@ -6,8 +6,8 @@ export class Entity extends Physics.Arcade.Sprite {
     lastShot = -1000;
     shootCooldown = 200;
 
-    constructor(scene: Scene, x: number, y: number) {
-        super(scene, x, y, "player1");
+    constructor(scene: Scene, x: number, y: number, tex: string) {
+        super(scene, x, y, tex);
         scene.add.existing(this);
     }
 

@@ -1,8 +1,10 @@
-import { GameObjects, Scene } from 'phaser';
+import { Scene } from 'phaser';
 
 import '../../types';
 import { UIScene } from '../ui/uiScene';
 import { Entity } from '../entities/Entity';
+import { Player } from '../entities/Player';
+import { Enemy } from '../entities/Enemy';
 
 export type KeyMap = {
     Up: Phaser.Input.Keyboard.Key;
@@ -24,6 +26,7 @@ export class GameScene extends Scene {
 
     playerVelocity = 2;
     player?: Entity;
+    enemies = new Set<Enemy>();
     background?: Phaser.GameObjects.Image;
 
     playerX = 0;
@@ -40,11 +43,18 @@ export class GameScene extends Scene {
         this.gameOverActive = false;
     }
 
+    spawnEnemy(){
+        new Enemy(this, 1280/2, 720/4 - 720/16);
+        new Enemy(this, 1280/2 + 1280/4, 720/4);
+        new Enemy(this, 1280/2 - 1280/4, 720/4);
+    }
+
     create() {
         this.score = 0;
         this.sound.pauseOnBlur = false;
 
-        this.player = new Entity(this, 1280/2, 720 - 720/5);
+        this.player = new Player(this, 1280/2, 720 - 720/5);
+        this.spawnEnemy();
 
         this.background = this.add.image(0,0,'background');
         this.background.setOrigin(0,0);
