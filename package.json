@@ -3,7 +3,14 @@
     "version": "0.0.1",
     "description": "Our entry for the trijam #262 - Wall Bounce",
     "type": "module",
-    "author": "Benjamin Vincent Schulenburg <ben@wolkenwelten.net>",
+    "author": "Eichstaett Gamedev",
+    "contributors": [
+        {
+            "name": "Benjamin Vincent Schulenburg",
+            "email": "ben@wolkenwelten.net",
+            "url": "https://cocz.net/"
+        }
+    ],
     "license": "Unlicense",
     "scripts": {
         "dev": "vite",
