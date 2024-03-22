@@ -7,7 +7,7 @@ export class Entity extends Physics.Arcade.Sprite {
     shootCooldown = 200;
 
     constructor(scene: Scene, x: number, y: number) {
-        super(scene, x, y, "player");
+        super(scene, x, y, "player1");
         scene.add.existing(this);
     }
 
@@ -27,7 +27,7 @@ export class Entity extends Physics.Arcade.Sprite {
         const max = Math.max(Math.abs(dx), Math.abs(dy));
         const vx = dx/max;
         const vy = dy/max;
-        new Bullet(this.scene, this.x, this.y, vx, vy);
+        new Bullet(this.scene, this.x + vx * 40, this.y + vy * 40, vx, vy);
     }
 
     lookAt(x: number, y: number){
