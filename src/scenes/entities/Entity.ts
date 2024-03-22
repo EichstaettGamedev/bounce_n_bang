@@ -5,7 +5,7 @@ import { GameScene } from "../game/gameScene";
 export class Entity extends Physics.Arcade.Sprite {
     speed = 4;
     lastShot = -1000;
-    shootCooldown = 200;
+    shootCooldown = 500;
     moveSound: Phaser.Sound.BaseSound;
     died = false;
 
@@ -36,6 +36,12 @@ export class Entity extends Physics.Arcade.Sprite {
     stopMoving() {
         this.moveSound.stop();
         this.moveSound.play();
+    }
+
+    shootStraight() {
+        const vx = Math.cos(this.rotation) * 100;
+        const vy = Math.sin(this.rotation) * 100;
+        this.shootAt(this.x + vx, this.y + vy);
     }
 
     shootAt(x: number, y: number) {
