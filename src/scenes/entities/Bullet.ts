@@ -18,9 +18,11 @@ export class Bullet extends Physics.Arcade.Image {
 
         if((this.y > 720) || (this.y < 0)){
             this.vy *= -1;
+            this.scene.sound.play('bounce');
         }
         if((this.x > 1280) || (this.x < 0)){
             this.vx *= -1;
+            this.scene.sound.play('bounce');
         }
     }
 }
