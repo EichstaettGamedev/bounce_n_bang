@@ -42,10 +42,10 @@ export class Entity extends Physics.Arcade.Sprite {
     shootStraight() {
         const vx = Math.cos(this.rotation) * 100;
         const vy = Math.sin(this.rotation) * 100;
-        this.shootAt(this.x + vx, this.y + vy, "enemyBullet");
+        this.shootAt(this.x + vx, this.y + vy, "enemyBullet", 0.25);
     }
 
-    shootAt(x: number, y: number, tex = "bullet") {
+    shootAt(x: number, y: number, tex = "bullet", speed = 0.5) {
         if(!this.scene){
             return;
         }
@@ -59,7 +59,7 @@ export class Entity extends Physics.Arcade.Sprite {
         const max = Math.max(Math.abs(dx), Math.abs(dy));
         const vx = dx/max;
         const vy = dy/max;
-        new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy, tex);
+        new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy, tex, speed);
         this.scene.sound.play('gunshot');
 
     }

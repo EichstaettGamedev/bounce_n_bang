@@ -2,22 +2,21 @@ import { Physics } from "phaser";
 import { GameScene } from "../game/gameScene";
 
 export class Bullet extends Physics.Arcade.Image {
-    speed = 0.5;
     vx = 0;
     vy = 0;
 
-    constructor(scene: GameScene, x: number, y: number, vx: number, vy: number, tex = "bullet") {
+    constructor(scene: GameScene, x: number, y: number, vx: number, vy: number, tex = "bullet", public speed = 0.5) {
         super(scene, x, y, tex);
         scene.add.existing(this);
         (scene as GameScene).bullets.add(this);
-        this.vx = this.speed * vx;
-        this.vy = this.speed * vy;
+        this.vx = vx;
+        this.vy = vy;
         this.scene = scene;
     }
 
     preUpdate(time: number, delta: number) {
-        this.x += this.vx * delta;
-        this.y += this.vy * delta;
+        this.x += this.vx * delta * this.speed;
+        this.y += this.vy * delta * this.speed;
 
         if((this.y > 720) || (this.y < 0)){
             this.vy *= -1;
