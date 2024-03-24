@@ -57,6 +57,7 @@ export class GameScene extends Scene {
         const px = 1280/2;
         const py = 720 - 720/5;
         this.player = new Player(this, px, py);
+        this.player.bulletsLeft = 6;
     }
 
     spawnEnemy(){
