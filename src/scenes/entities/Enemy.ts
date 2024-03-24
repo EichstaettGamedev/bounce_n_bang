@@ -3,6 +3,7 @@ import { GameScene } from "../game/gameScene";
 
 export class Enemy extends Entity {
     shootCooldown = 2000;
+    dd = 32*32;
 
     constructor(scene: GameScene, x: number, y: number) {
         super(scene, x, y, "player2");

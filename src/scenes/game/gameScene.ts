@@ -70,9 +70,8 @@ export class GameScene extends Scene {
     create() {
         this.sound.play('music');
         this.score = 0;
-        this.level = 1;
+        this.level = 0;
         this.sound.pauseOnBlur = false;
-
 
         this.resetPlayer();
         this.spawnEnemy();
@@ -92,16 +91,6 @@ export class GameScene extends Scene {
         this.gameTicks = 0;
 
         this.input.mouse?.disableContextMenu();
-        this.input.on('pointermove', (pointer:any) => {
-            const x = (pointer.worldX/32)|0;
-            const y = (pointer.worldY/32)|0;
-            if(pointer.buttons & 1){
-                //console.log(pointer);
-            }
-        }, this);
-
-        //this.cameras.main.setBounds(0, 0, 1280, 720);
-        //this.cameras.main.startFollow(this.player, false, 0.1, 0.1, 0, 0);
     }
 
     nextLevel() {
@@ -165,6 +154,5 @@ export class GameScene extends Scene {
         if(this.countLiveEnemies() <= 0){
             this.nextLevel();
         }
-        //this.cameras.main.setScroll(this.playerX, this.playerY);
     }
 }

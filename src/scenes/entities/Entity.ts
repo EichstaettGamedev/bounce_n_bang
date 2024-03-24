@@ -8,6 +8,7 @@ export class Entity extends Physics.Arcade.Sprite {
     shootCooldown = 500;
     moveSound: Phaser.Sound.BaseSound;
     died = false;
+    dd = 24*24;
 
     constructor(scene: GameScene, x: number, y: number, tex: string) {
         super(scene, x, y, tex);
