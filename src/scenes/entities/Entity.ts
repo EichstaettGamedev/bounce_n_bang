@@ -45,11 +45,22 @@ export class Entity extends Physics.Arcade.Sprite {
         this.shootAt(this.x + vx, this.y + vy, "enemyBullet", 0.25);
     }
 
+    canShoot():boolean {
+        if(this.scene.time.now < (this.lastShot + this.shootCooldown)){
+            return false;
+        }
+        return true;
+    }
+
+    onShoot() {
+        this.scene.sound.play('gunshot');
+    }
+
     shootAt(x: number, y: number, tex = "bullet", speed = 0.5) {
         if(!this.scene){
             return;
         }
-        if(this.scene.time.now < (this.lastShot + this.shootCooldown)){
+        if(!this.canShoot()){
             return;
         }
 
@@ -60,8 +71,7 @@ export class Entity extends Physics.Arcade.Sprite {
         const vx = dx/max;
         const vy = dy/max;
         new Bullet(this.scene as GameScene, this.x + vx * 40, this.y + vy * 40, vx, vy, tex, speed);
-        this.scene.sound.play('gunshot');
-
+        this.onShoot();
     }
 
     lookAt(x: number, y: number){

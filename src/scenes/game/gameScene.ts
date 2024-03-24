@@ -26,7 +26,7 @@ export class GameScene extends Scene {
     score = 0;
 
     playerVelocity = 2;
-    player?: Entity;
+    player?: Player;
     enemies = new Set<Enemy>();
     entities = new Set<Entity>();
     bullets = new Set<Bullet>();
@@ -35,6 +35,8 @@ export class GameScene extends Scene {
     playerX = 0;
     playerY = 0;
     level = 0;
+
+    music?: Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.WebAudioSound;
 
     scoreText?: Phaser.GameObjects.Text;
 
@@ -55,6 +57,7 @@ export class GameScene extends Scene {
         const px = 1280/2;
         const py = 720 - 720/5;
         this.player = new Player(this, px, py);
+        this.player.bulletsLeft = 6;
     }
 
     spawnEnemy(){
@@ -66,7 +69,10 @@ export class GameScene extends Scene {
     }
 
     create() {
-        this.sound.play('music');
+        this.music = this.sound.add('music');
+        this.music.loop = true;
+        this.music.play();
+
         this.score = 0;
         this.level = 0;
         this.sound.pauseOnBlur = false;
