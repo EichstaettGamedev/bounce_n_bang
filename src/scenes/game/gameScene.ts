@@ -6,6 +6,7 @@ import { Entity } from '../entities/Entity';
 import { Player } from '../entities/Player';
 import { Enemy } from '../entities/Enemy';
 import { Bullet } from '../entities/Bullet';
+import { Wall } from '../entities/Wall';
 
 export type KeyMap = {
     Up: Phaser.Input.Keyboard.Key;
@@ -30,6 +31,7 @@ export class GameScene extends Scene {
     enemies = new Set<Enemy>();
     entities = new Set<Entity>();
     bullets = new Set<Bullet>();
+    walls = new Set<Wall>();
     background?: Phaser.GameObjects.Image;
 
     playerX = 0;
@@ -68,6 +70,24 @@ export class GameScene extends Scene {
         }
     }
 
+    spawnWalls(){
+        for(const w of this.walls){
+            w.destroy();
+        }
+        this.walls.clear();
+        for(let i=this.level;i;i--){
+            const x = Math.random() * 1200 + 40;
+            const y = Math.random() * 720/4 + 300;
+            new Wall(this, x, y);
+        }
+    }
+
+    prepareLevel() {
+        this.resetPlayer();
+        this.spawnEnemy();
+        this.spawnWalls();
+    }
+
     create() {
         this.music = this.sound.add('music');
         this.music.loop = true;
@@ -77,8 +97,7 @@ export class GameScene extends Scene {
         this.level = 0;
         this.sound.pauseOnBlur = false;
 
-        this.resetPlayer();
-        this.spawnEnemy();
+        this.prepareLevel();
 
         this.background = this.add.image(0,0,'background');
         this.background.setOrigin(0,0);
@@ -109,8 +128,7 @@ export class GameScene extends Scene {
         this.enemies.clear();
         this.entities.clear();
         this.bullets.clear();
-        this.resetPlayer();
-        this.spawnEnemy();
+        this.prepareLevel();
     }
 
     countLiveEnemies() {

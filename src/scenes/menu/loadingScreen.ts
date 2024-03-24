@@ -107,6 +107,7 @@ export class LoadingScreenScene extends Scene {
         this.load.image('background', 'unpacked_gfx/background.png');
         this.load.image('bullet', 'unpacked_gfx/bullet.png');
         this.load.image('enemyBullet', 'unpacked_gfx/bulletEnemy.png');
+        this.load.image('stoneWall', 'unpacked_gfx/stoneWall.png');
 
         this.load.audio('bounce', 'sfx/bounce.mp3');
         this.load.audio('death', 'sfx/death.mp3');

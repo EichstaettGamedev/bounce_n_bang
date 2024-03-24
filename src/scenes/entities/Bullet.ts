@@ -37,5 +37,11 @@ export class Bullet extends Physics.Arcade.Image {
                 e.die();
             }
         }
+        for(const w of scene.walls){
+            if(w.isInside(this.x, this.y, 16)){
+                this.vx *= -1;
+                this.vy *= -1;
+            }
+        }
     }
 }
