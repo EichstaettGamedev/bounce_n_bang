@@ -1,5 +1,4 @@
 import { Physics } from "phaser";
-import { Bullet } from "./Bullet";
 import { GameScene } from "../game/gameScene";
 
 export class Wall extends Physics.Arcade.Sprite {
@@ -14,7 +13,13 @@ export class Wall extends Physics.Arcade.Sprite {
         return !(((x+r) < this.x) || ((x-r) > this.x + this.width) || ((y+r) < this.y) || ((y-r) > this.y + this.height));
     }
 
-    whichSide(x:number, y:number): number {
-        
+    whichSide(x:number, y:number): "top" | "bot" | "left" | "right" {
+        const dx = x - this.x;
+        const dy = y - this.y;
+        if(Math.abs(dx) > Math.abs(dy)){
+            return dx < 0 ? "left" : "right"
+        } else {
+            return dy > 0 ? "top" : "bot";
+        }
     }
 }

@@ -41,6 +41,17 @@ export class Bullet extends Physics.Arcade.Image {
             if(w.isInside(this.x, this.y, 16)){
                 this.vx *= -1;
                 this.vy *= -1;
+                const side = w.whichSide(this.x, this.y);
+                switch(side){
+                case "top":
+                case "bot":
+                    this.vy *= -1;
+                    break;
+                case "left":
+                case "right":
+                    this.vx *= -1;
+                    break;
+                }
             }
         }
     }
