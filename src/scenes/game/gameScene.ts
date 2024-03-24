@@ -78,7 +78,11 @@ export class GameScene extends Scene {
         for(let i=this.level;i;i--){
             const x = Math.random() * 1200 + 40;
             const y = Math.random() * 720/4 + 300;
-            new Wall(this, x, y);
+            const t = Math.random() > 0.7 ? "stoneWall" : "stoneWallSmall";
+            const v = (Math.random() * 3)|0;
+            const tex = t + (v ? v+1 : "");
+            console.log(tex);
+            new Wall(this, x, y, tex);
         }
     }
 
@@ -89,6 +93,9 @@ export class GameScene extends Scene {
     }
 
     create() {
+        if(this.music){
+            this.music.destroy();
+        }
         this.music = this.sound.add('music');
         this.music.loop = true;
         this.music.play();
@@ -171,7 +178,12 @@ export class GameScene extends Scene {
         }
 
         if(this.player?.died){
-            this.scene.switch("GameOverScene");
+            if(this.scene.manager.isVisible("MainMenuScene")){
+                this.nextLevel();
+            } else {
+                this.music?.destroy();
+                this.scene.switch("GameOverScene");
+            }
         }
         if(this.countLiveEnemies() <= 0){
             this.nextLevel();

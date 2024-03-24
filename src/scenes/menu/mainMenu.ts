@@ -1,12 +1,16 @@
 import options from '../../options';
 import { Scene } from 'phaser';
 
-const introHTML = `<h1>Bounce 'n' Bang</h1>
+const introHTML = `<div style="display:block; width:100%; max-width: 800px;"><h1>Bounce 'n' Bang</h1>
 <br/>
-<p>WASD to look around, Left Mouse button to Shoot. Have fun!</p>`;
+<p>In "Bounce 'n' Bang," you step into the boots of Clint McBang, a gunslinger with a special revolver: his bullets can bounce! You have only six shots to take down the bandits across the river. Aim carefully so your bullets ricochet off rocks and hit the bandits. Every shot counts, so be like Clint and master the bounce! Good luck!</p>
+<p>WASD to look around, Left Mouse button to Shoot</p>
+<p>Code: Ben, Graphics: Roland, Design/Sound: Eddy</p>
+<p>Sound Assets are from <a target="_blank" href="https://otologic.jp/">otologic.jp</a></p>
+</div>`;
 
 const gitHubLink =
-    'https://github.com/Melchizedek6809/bounce_n_bang';
+    'https://github.com/EichstaettGamedev/bounce_n_bang';
 const phaserLink = 'https://phaser.io/';
 
 export class MainMenuScene extends Scene {

@@ -12,6 +12,8 @@ export class Enemy extends Entity {
         this.rotation = Math.random() * Math.PI;
     }
 
+    onShoot() { }
+
     die(){
         if(this.scene){
             (this.scene as GameScene).addScore(1);
